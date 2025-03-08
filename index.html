@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>esercizio-dom3</title>
+    </head>
+    <body>
+        <button id="mostraContatti">Mostra contatti</button>
+        <button id="creaTabellaContatti">Crea tabella</button>
+        <button id="aggiungiContatto">Aggiungi contatto</button>
+        <button id="eliminaContatto">Elimina contatto</button>
+        <button id="modificaContatto">Modifica contatto</button>
+        
+        <table id="rubrica">
+            <tr>
+                <td id="nomeContatto">Numero contatto</td>
+                <td id="numeroContatto">Nome contatto</td>
+            </tr>
+        </table>
+
+        <script>
+            let rubrica = document.querySelector('#rubrica');
+            let nomeContatto = document.querySelector('#nomeContatto');
+            let numeroContatto = document.querySelector('#numeroContatto');
+            let mostraContatti = document.querySelector('#mostraContatti');
+            let creaTabellaContatti = document.querySelector('#creaTabellaContatti');
+            let aggiungiContatto = document.querySelector('#aggiungiContatto')
+            let eliminaContatto = document.querySelector('#eliminaContatto');
+            let modificaContatto = document.querySelector('#modificaContatto');
+            let contatti = [
+                {'name': 'mario', 'numero': '111111111111111'},
+                {'name': 'silvio', 'numero': '22222222222222'},
+                {'name': 'paolo', 'numero': '333333333333333'},
+                {'name': 'piero', 'numero': '4444444444444444'},
+            ];
+        </script>
+    </body>
+</html>
