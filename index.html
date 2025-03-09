@@ -6,30 +6,32 @@
         <title>esercizio-dom3</title>
     </head>
     <body>
-        <button id="mostraContatti">Mostra contatti</button>
-        <button id="creaTabellaContatti">Crea tabella</button>
+        <header style="display: flex; justify-content: center;">
+            <h1>RUBRICA</h1>
+        </header>
+        <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 40px;">
+        <button id="mostraContatti">Mostra/nascondi contatti</button>
         <button id="aggiungiContatto">Aggiungi contatto</button>
         <button id="eliminaContatto">Elimina contatto</button>
         <button id="modificaContatto">Modifica contatto</button>
-        
-        <table id="rubrica">
-            <tr>
-                <td id="nomeContatto">Numero contatto</td>
-                <td id="numeroContatto">Nome contatto</td>
-            </tr>
-        </table>
-
+        </div>
+        <div style="display: flex; flex-direction: row; margin-top: 40px;" id="rubrica">
+                <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                    <p id="nomeContatto">Numero contatto</p>
+                    <p id="numeroContatto">Nome contatto</p>
+                </div>
+        </div>
         <script>
             let rubrica = document.querySelector('#rubrica');
             let nomeContatto = document.querySelector('#nomeContatto');
             let numeroContatto = document.querySelector('#numeroContatto');
             let mostraContatti = document.querySelector('#mostraContatti');
-            let creaTabellaContatti = document.querySelector('#creaTabellaContatti');
             let aggiungiContatto = document.querySelector('#aggiungiContatto')
             let eliminaContatto = document.querySelector('#eliminaContatto');
             let modificaContatto = document.querySelector('#modificaContatto');
+           
             let contatti = [
-                {'name': 'mario', 'numero': '111111111111111'},
+                {name: 'mario', numero: 111111111111111},
                 {'name': 'silvio', 'numero': '22222222222222'},
                 {'name': 'paolo', 'numero': '333333333333333'},
                 {'name': 'piero', 'numero': '4444444444444444'},
