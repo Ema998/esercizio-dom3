@@ -36,6 +36,7 @@
             <button id="mostraNascondiRubrica">Mostra/Nascondi rubrica</button>
             <button id="creaTabella">Crea tabella</button>
             <button id="aggiungiContatto">Aggiungi contatto</button>
+            <button id="modificaContatto">Modifica contatto</button>
         </div>
         <div id="container">
             <table id="rubrica" class="rubricaTable">
@@ -44,6 +45,7 @@
 
         <script>
             let container = document.querySelector('#container');
+            let btnModifica = document.querySelector('#modificaContatto')
             let rubrica = document.querySelector ('#rubrica');
             let nomeContatto = document.querySelector('#nomeContatto');
             let numeroContatto = document.querySelector('#numeroContatto');
@@ -63,17 +65,19 @@
                     let riga = document.createElement("tr")
                     riga.innerHTML = `<td> ${contatto.name} </td>
                                       <td> ${contatto.numero} </td>
-                                      <td> <button onclick="eliminaContatto(${contatto.index})">Elimina</button> </td>
-                                      <td> <button onclick="modificaContatto(${contatto.index})"> Modifica Contatto </td>`;
+                                      <td> <button onclick="eliminaContatto(${contatto.index})">Elimina</button> </td>`;
                     rubrica.appendChild(riga);
                 });
             };
 
             function modificaContatto() {
-                let nuovoNome = prompt('Inserisci il nuovo nome:', contatti[index].name);
-                let nuovoNumero = parseInt(prompt('Inserisci il nuovo numero', contatti[index].numero));
-                let contattoModificato = {'name' : 'nuovoNome', 'numero' : 'nuovoNumero'}
-                contatti[index] = contattoModificato;
+                let nome = prompt('Inserisci il nuovo nome:');
+                let numero = parseInt(prompt('Inserisci il nuovo numero'));
+                contatti.forEach(contatto => {
+                    if (contatto.name == nome) {
+                        contatto.numero = numero;
+                    };
+                });
                 popolaTabella();
             }
 
@@ -81,6 +85,17 @@
                 contatti.splice(index, 1);
                 popolaTabella();
             }
+
+            function aggiungiContatto() {
+                let nomeNuovoContatto = prompt('Inserire nome contatto');
+                let numeroNuovoContatto  = parseInt(prompt('Inserire numero contatto'));
+                let riga = document.createElement("tr");
+                riga.innerHTML = `<td> ${nomeNuovoContatto} </td>
+                                <td> ${numeroNuovoContatto} </td>
+                                <td> <button onclick="eliminaContatto()">Elimina</button> </td>`;
+                rubrica.appendChild(riga);
+                contatti.push({'name': nomeNuovoContatto, 'numero': numeroNuovoContatto});
+            };
 
             creaTabella.addEventListener('click', () => {
                 popolaTabella();
@@ -91,14 +106,11 @@
             });
 
             aggiungiContatto.addEventListener('click', () => {
-                let nomeNuovoContatto = prompt('Inserire nome contatto');
-                let numeroNuovoContatto  = parseInt(prompt('Inserire numero contatto'));
-                let riga = document.createElement("tr");
-                riga.innerHTML = `<td> ${nomeNuovoContatto} </td>
-                                <td> ${numeroNuovoContatto} </td>
-                                <td> <button onclick="eliminaContatto()">Elimina</button> </td>`;
-                rubrica.appendChild(riga);
-                contatti.push({'name': nomeNuovoContatto, 'numero': numeroNuovoContatto});
+               aggiungiContatto();
+            });
+
+            btnModifica.addEventListener('click', () => {
+                modificaContatto()
             });
         </script>
     </body>
