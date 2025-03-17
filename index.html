@@ -4,38 +4,102 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>esercizio-dom3</title>
+        <style>
+            .hide {
+                display: none
+            }
+            .header{
+                justify-content: center; 
+                display: flex;
+            }
+            .buttonContainer{
+                margin-top: 40px; 
+                display: flex; 
+                flex-direction: row; 
+                align-items: center; 
+                justify-content: space-around;
+            }
+            .rubricaTable {
+                display: flex; 
+                flex-direction: column; 
+                margin-top: 40px; 
+                align-items: center;        
+                justify-content: space-around;
+            }
+        </style>
     </head>
     <body>
-        <header style="display: flex; justify-content: center;">
-            <h1>RUBRICA</h1>
+        <header class="header">
+            <h1>Rubrica</h1>
         </header>
-        <div style="display: flex; flex-direction: row; justify-content: space-around; margin-top: 40px;">
-        <button id="mostraContatti">Mostra/nascondi contatti</button>
-        <button id="aggiungiContatto">Aggiungi contatto</button>
-        <button id="eliminaContatto">Elimina contatto</button>
-        <button id="modificaContatto">Modifica contatto</button>
+        <div class="buttonContainer">
+            <button id="mostraNascondiRubrica">Mostra/Nascondi rubrica</button>
+            <button id="creaTabella">Crea tabella</button>
+            <button id="aggiungiContatto">Aggiungi contatto</button>
         </div>
-        <div style="display: flex; flex-direction: row; margin-top: 40px;" id="rubrica">
-                <div style="display: flex; flex-direction: row; justify-content: space-around;">
-                    <p id="nomeContatto">Numero contatto</p>
-                    <p id="numeroContatto">Nome contatto</p>
-                </div>
+        <div id="container">
+            <table id="rubrica" class="rubricaTable">
+            </table>
         </div>
+
         <script>
-            let rubrica = document.querySelector('#rubrica');
+            let container = document.querySelector('#container');
+            let rubrica = document.querySelector ('#rubrica');
             let nomeContatto = document.querySelector('#nomeContatto');
             let numeroContatto = document.querySelector('#numeroContatto');
-            let mostraContatti = document.querySelector('#mostraContatti');
+            let mostraNascondiRubrica = document.querySelector('#mostraNascondiRubrica');
+            let creaTabella = document.querySelector('#creaTabella');
             let aggiungiContatto = document.querySelector('#aggiungiContatto')
-            let eliminaContatto = document.querySelector('#eliminaContatto');
-            let modificaContatto = document.querySelector('#modificaContatto');
-           
             let contatti = [
-                {name: 'mario', numero: 111111111111111},
+                {'name': 'mario', 'numero': '111111111111111'},
                 {'name': 'silvio', 'numero': '22222222222222'},
                 {'name': 'paolo', 'numero': '333333333333333'},
                 {'name': 'piero', 'numero': '4444444444444444'},
             ];
+
+            function popolaTabella() {
+                rubrica.innerHTML = " "
+                contatti.forEach(contatto => {
+                    let riga = document.createElement("tr")
+                    riga.innerHTML = `<td> ${contatto.name} </td>
+                                      <td> ${contatto.numero} </td>
+                                      <td> <button onclick="eliminaContatto(${contatto.index})">Elimina</button> </td>
+                                      <td> <button onclick="modificaContatto(${contatto.index})"> Modifica Contatto </td>`;
+                    rubrica.appendChild(riga);
+                });
+            };
+
+            function modificaContatto() {
+                let nuovoNome = prompt('Inserisci il nuovo nome:', contatti[index].name);
+                let nuovoNumero = parseInt(prompt('Inserisci il nuovo numero', contatti[index].numero));
+                let contattoModificato = {'name' : 'nuovoNome', 'numero' : 'nuovoNumero'}
+                contatti[index] = contattoModificato;
+                popolaTabella();
+            }
+
+            function eliminaContatto(index) {
+                contatti.splice(index, 1);
+                popolaTabella();
+            }
+
+            creaTabella.addEventListener('click', () => {
+                popolaTabella();
+            });
+
+            mostraNascondiRubrica.addEventListener('click', () => {
+                container.classList.toggle('hide');
+            });
+
+            aggiungiContatto.addEventListener('click', () => {
+                let nomeNuovoContatto = prompt('Inserire nome contatto');
+                let numeroNuovoContatto  = parseInt(prompt('Inserire numero contatto'));
+                let riga = document.createElement("tr");
+                riga.innerHTML = `<td> ${nomeNuovoContatto} </td>
+                                <td> ${numeroNuovoContatto} </td>
+                                <td> <button onclick="eliminaContatto()">Elimina</button> </td>`;
+                rubrica.appendChild(riga);
+                contatti.push({'name': nomeNuovoContatto, 'numero': numeroNuovoContatto});
+            });
         </script>
     </body>
 </html>
