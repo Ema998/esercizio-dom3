@@ -86,7 +86,7 @@
                 popolaTabella();
             }
 
-            function aggiungiContatto() {
+            function addContatto() {
                 let nomeNuovoContatto = prompt('Inserire nome contatto');
                 let numeroNuovoContatto  = parseInt(prompt('Inserire numero contatto'));
                 let riga = document.createElement("tr");
@@ -106,7 +106,7 @@
             });
 
             aggiungiContatto.addEventListener('click', () => {
-               aggiungiContatto();
+               addContatto();
             });
 
             btnModifica.addEventListener('click', () => {
