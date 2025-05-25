@@ -65,13 +65,13 @@
                     let riga = document.createElement("tr")
                     riga.innerHTML = `<td> ${contatto.name} </td>
                                       <td> ${contatto.numero} </td>
-                                      <td> <button onclick="eliminaContatto(${contatto.index})">Elimina</button> </td>`;
+                                      <td> <button onclick="eliminaContatto(${index})">Elimina</button> </td>`;
                     rubrica.appendChild(riga);
                 });
             };
 
             function modificaContatto() {
-                let nome = prompt('Inserisci il nuovo nome:');
+                let nome = prompt('Inserisci il nome del contatto da modificare:');
                 let numero = parseInt(prompt('Inserisci il nuovo numero'));
                 contatti.forEach(contatto => {
                     if (contatto.name == nome) {
@@ -95,6 +95,7 @@
                                 <td> <button onclick="eliminaContatto()">Elimina</button> </td>`;
                 rubrica.appendChild(riga);
                 contatti.push({'name': nomeNuovoContatto, 'numero': numeroNuovoContatto});
+                popolaTabella();
             };
 
             creaTabella.addEventListener('click', () => {
