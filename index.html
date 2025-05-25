@@ -73,7 +73,7 @@
             function modificaContatto() {
                 let nome = prompt('Inserisci il nome del contatto da modificare:');
                 let numero = parseInt(prompt('Inserisci il nuovo numero'));
-                contatti.forEach(contatto => {
+                contatti.forEach((contatto, index) => {
                     if (contatto.name == nome) {
                         contatto.numero = numero;
                     };
